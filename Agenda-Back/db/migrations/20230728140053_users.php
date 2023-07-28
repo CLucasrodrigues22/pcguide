@@ -16,8 +16,8 @@ final class Users extends AbstractMigration
             ->addColumn('password', 'string', ['limit' => 200, 'null' => false])
             ->addColumn('phone', 'string', ['limit' => 50, 'null' => false])
             ->addColumn('photo', 'string', ['limit' => 200, 'null' => true])
-            ->addColumn('created', 'timestamp')
-            ->addColumn('modified', 'timestamp')
+            ->addColumn('created', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
+            ->addColumn('modified', 'timestamp', ['default' => 'CURRENT_TIMESTAMP'])
             ->create();
     }
 }
