@@ -68,4 +68,16 @@ class UsersController extends Action
             echo $e;
         }
     }
+
+    public function show()
+    {
+        try {
+            $user = Container::getModel('Users');
+            $id = $_GET['id'];
+            $dataUser = $user->showOnlyUser($id);
+            var_dump($dataUser);
+        } catch (\PDOException $e) {
+            echo $e;
+        }
+    }
 }

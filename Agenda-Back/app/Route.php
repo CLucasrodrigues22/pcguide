@@ -11,18 +11,25 @@ class Route extends Bootstrap
     protected function initRoutes()
     {
 
-        // Rota exibição de todos os usuários
+        // Route to show all users
         $routes['/users'] = array(
             'route' => '/users',
             'controller' => 'UsersController',
             'action' => 'index'
         );
 
-        // Rota criação de usuários
+        // Route to create/save users data
         $routes['/createusers'] = array(
             'route' => '/createusers',
             'controller' => 'UsersController',
             'action' => 'store'
+        );
+
+        // Route to show user data by id
+        $routes['/showuser'] = array(
+            'route' => '/showuser',
+            'controller' => 'UsersController',
+            'action' => 'show'
         );
 
         $this->setRoutes($routes);

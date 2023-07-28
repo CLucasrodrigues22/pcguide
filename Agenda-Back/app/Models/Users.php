@@ -42,4 +42,10 @@ class Users extends Model
 
         return $this;
     }
+
+    public function showOnlyUser($id)
+    {
+        $q = "select user_id, name, email, phone, photo from users where user_id = $id";
+        return $this->db->query($q)->fetchObject();
+    }
 }
