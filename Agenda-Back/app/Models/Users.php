@@ -23,6 +23,12 @@ class Users extends Model
         $this->$attr = $value;
     }
 
+    public function getAll()
+    {
+        $q = "select * from users";
+        return $this->db->query($q)->fetchAll();
+    }
+
     public function create()
     {
         $q = "insert into users (name, email, password, phone, photo) values (:name, :email, :password, :phone, :photo)";

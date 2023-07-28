@@ -18,7 +18,7 @@ class Route extends Bootstrap {
 
         // Rota criação de usuários
         $routes['/users'] = array (
-            'route' => '/users',
+            'route' => '/createusers',
             'controller' => 'UsersController',
             'action' => 'store'
         );
