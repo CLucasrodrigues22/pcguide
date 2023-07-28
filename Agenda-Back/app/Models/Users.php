@@ -48,4 +48,17 @@ class Users extends Model
         $q = "select user_id, name, email, phone, photo from users where user_id = $id";
         return $this->db->query($q)->fetchObject();
     }
+
+    public function update($id)
+    {
+        $q = "update users set name = :name, email = :email, phone = :phone, photo = :photo where user_id = $id";
+        $stmt = $this->db->prepare($q);
+        $stmt->bindValue(':name', $this->__get('name'));
+        $stmt->bindValue(':email', $this->__get('email'));
+        $stmt->bindValue(':phone', $this->__get('phone'));
+        $stmt->bindValue(':photo', $this->__get('photo'));
+        $stmt->execute();
+
+        return $this;
+    }
 }

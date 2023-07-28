@@ -32,6 +32,13 @@ class Route extends Bootstrap
             'action' => 'show'
         );
 
+        // Route to update user data by id
+        $routes['/updateuser'] = array(
+            'route' => '/updateuser',
+            'controller' => 'UsersController',
+            'action' => 'update'
+        );
+
         $this->setRoutes($routes);
     }
 }
