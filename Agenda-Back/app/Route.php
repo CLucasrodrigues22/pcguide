@@ -39,6 +39,13 @@ class Route extends Bootstrap
             'action' => 'update'
         );
 
+        // Route to destroy user data by id
+        $routes['/destroyuser'] = array(
+            'route' => '/destroyuser',
+            'controller' => 'UsersController',
+            'action' => 'destroy'
+        );
+
         $this->setRoutes($routes);
     }
 }

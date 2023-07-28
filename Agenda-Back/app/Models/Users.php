@@ -61,4 +61,13 @@ class Users extends Model
 
         return $this;
     }
+
+    public function delete($id)
+    {
+        $q = "delete from users where user_id = $id";
+        $stmt = $this->db->prepare($q);
+        $stmt->execute();
+
+        return $this;
+    }
 }

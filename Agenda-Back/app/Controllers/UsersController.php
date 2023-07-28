@@ -136,4 +136,23 @@ class UsersController extends Action
             echo $e;
         }
     }
+
+    public function destroy()
+    {
+        try {
+            $id = $_GET['id'];
+            $user = Container::getModel('Users');
+
+            $dir = 'storage/usersPhoto/';
+
+            // Remove current photo
+            $photoOld = $user->showOnlyUser($id);
+            $path = $dir . $photoOld->photo;
+            unlink($path);
+
+            $user->delete($id);
+        } catch (\PDOException $e) {
+            echo $e;
+        }
+    }
 }
