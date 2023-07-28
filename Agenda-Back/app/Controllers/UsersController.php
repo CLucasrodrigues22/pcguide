@@ -6,14 +6,18 @@ namespace App\Controllers;
 use MVC\Controller\Action;
 use MVC\Model\Container;
 
-// Model
-use App\Models\Users;
-
 class UsersController extends Action
 {
 
     public function index()
     {
+        try {
+            $users = Container::getModel('Users');
+            $getListUsers = $users->getAllUsers();
+            var_dump($getListUsers);
+        } catch (\PDOException $e) {
+            echo $e;
+        }
     }
 
     public function store()

@@ -23,9 +23,9 @@ class Users extends Model
         $this->$attr = $value;
     }
 
-    public function getAll()
+    public function getAllUsers()
     {
-        $q = "select * from users";
+        $q = "select user_id, name, email, phone, photo from users";
         return $this->db->query($q)->fetchAll();
     }
 
