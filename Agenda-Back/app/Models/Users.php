@@ -40,6 +40,18 @@ class Users extends Model
         $stmt->bindValue(':photo', $this->__get('photo'));
         $stmt->execute();
 
+        // Get the user_id of the last inserted row
+        $lastUserInsertedId = $this->db->lastInsertId();
+
+        // Fetch the inserted data from the database
+        $q = "SELECT user_id, name, email, phone, photo FROM users WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($q);
+        $stmt->bindValue(':user_id', $lastUserInsertedId);
+        $stmt->execute();
+
+        // Fetch the data and return it as an associative array and return
+        $insertedData = $stmt->fetch(\PDO::FETCH_ASSOC);
+        $this->data = $insertedData;
         return $this;
     }
 
@@ -59,15 +71,27 @@ class Users extends Model
         $stmt->bindValue(':photo', $this->__get('photo'));
         $stmt->execute();
 
-        return $this;
+        // Fetch the updated data
+        $q = "SELECT * FROM users WHERE user_id = :user_id";
+        $stmt = $this->db->prepare($q);
+        $stmt->bindValue(':user_id', $id);
+        $stmt->execute();
+
+        // Return the updated data as an associative array
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     public function delete($id)
     {
-        $q = "delete from users where user_id = $id";
-        $stmt = $this->db->prepare($q);
-        $stmt->execute();
-
-        return $this;
+        // Fetch the updated data to verificate if user exist
+        $q = "select * from users where user_id = $id";
+        if ($this->db->query($q)->fetchObject() != false) {
+            $q = "delete from users where user_id = $id";
+            $stmt = $this->db->prepare($q);
+            $stmt->execute();
+            return true;
+        } else {
+            return false;
+        }
     }
 }

@@ -9,7 +9,7 @@ class Connection {
             $conn = new \PDO(
                 "mysql:host=localhost;dbname=agenda;charset=utf8",
                 "root",
-                "P@ssw0rd"
+                "password"
             );
 
             return $conn;

@@ -23,7 +23,7 @@ return
             'host' => 'localhost',
             'name' => 'agenda',
             'user' => 'root',
-            'pass' => 'P@ssw0rd',
+            'pass' => 'password',
             'port' => '3306',
             'charset' => 'utf8',
         ],

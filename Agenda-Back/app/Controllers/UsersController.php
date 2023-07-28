@@ -14,9 +14,15 @@ class UsersController extends Action
         try {
             $users = Container::getModel('Users');
             $getListUsers = $users->getAllUsers();
-            var_dump($getListUsers);
+            http_response_code(200);
+            echo json_encode($getListUsers);
         } catch (\PDOException $e) {
-            echo $e;
+            $response = [
+                "erro" => true,
+                "messagem" => "Ocorreu o seguinte erro: " . $e
+            ];
+            http_response_code(500);
+            echo json_encode($response);
         }
     }
 
@@ -63,9 +69,15 @@ class UsersController extends Action
             $user->__set('password', password_hash($_POST['password'], PASSWORD_DEFAULT));
             $user->__set('phone', $_POST['phone']);
             $response = $user->create();
-            var_dump($response);
+            http_response_code(201);
+            echo json_encode($response);
         } catch (\PDOException $e) {
-            echo $e;
+            $response = [
+                "erro" => true,
+                "messagem" => "Ocorreu o seguinte erro: " . $e
+            ];
+            http_response_code(500);
+            echo json_encode($response);
         }
     }
 
@@ -74,10 +86,16 @@ class UsersController extends Action
         try {
             $id = $_GET['id'];
             $user = Container::getModel('Users');
-            $dataUser = $user->showOnlyUser($id);
-            var_dump($dataUser);
+            $response = $user->showOnlyUser($id);
+            http_response_code(200);
+            echo json_encode($response);
         } catch (\PDOException $e) {
-            echo $e;
+            $response = [
+                "erro" => true,
+                "messagem" => "Ocorreu o seguinte erro: " . $e
+            ];
+            http_response_code(500);
+            echo json_encode($response);
         }
     }
 
@@ -131,9 +149,16 @@ class UsersController extends Action
             $user->__set('name', $_POST['name']);
             $user->__set('email', $_POST['email']);
             $user->__set('phone', $_POST['phone']);
-            $user->update($id);
+            $response = $user->update($id);
+            http_response_code(200);
+            echo json_encode($response);
         } catch (\PDOException $e) {
-            echo $e;
+            $response = [
+                "erro" => true,
+                "messagem" => "Ocorreu o seguinte erro: " . $e
+            ];
+            http_response_code(500);
+            echo json_encode($response);
         }
     }
 
@@ -150,9 +175,16 @@ class UsersController extends Action
             $path = $dir . $photoOld->photo;
             unlink($path);
 
-            $user->delete($id);
+            $response = $user->delete($id);
+            http_response_code(200);
+            echo json_encode($response);
         } catch (\PDOException $e) {
-            echo $e;
+            $response = [
+                "erro" => true,
+                "messagem" => "Ocorreu o seguinte erro: " . $e
+            ];
+            http_response_code(500);
+            echo json_encode($response);
         }
     }
 }
