@@ -30,7 +30,7 @@ class UsersController extends Action
     {
         try {
             $user = Container::getModel('Users');
-            $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/');
+            $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/', ['png', 'jpg', 'jpeg']);
             // Send user data received from form to model
             $user->__set('name', $_POST['name']);
             $user->__set('email', $_POST['email']);
@@ -64,7 +64,7 @@ class UsersController extends Action
                 "messagem" => "Ocorreu o seguinte erro: " . $e
             ];
             http_response_code(500);
-            echo json_encode($response);
+            echo json_encode($response);    
         }
     }
 
@@ -76,19 +76,13 @@ class UsersController extends Action
 
             if ($_FILES['photo']['name'] != '') {
                 // setting attribut photo with new file name
-                $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/');
+                $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/', ['png', 'jpg', 'jpeg']);
                 $user->__set('photo', $storagePhoto);
             } else {
                 //recovery current photo's name if $_FILES if empty
                 $photoOld = $user->showOnlyUser($id);
                 $user->__set('photo', $photoOld->photo);
             }
-
-            // else {
-            //     //recovery current photo's name if $_FILES if empty
-            //     $photoOld = $user->showOnlyUser($id);
-            //     $user->__set('photo', $photoOld->photo);
-            // }
 
             $user->__set('name', $_POST['name']);
             $user->__set('email', $_POST['email']);
