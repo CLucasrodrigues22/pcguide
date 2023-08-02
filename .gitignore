@@ -1,1 +1,3 @@
 /public/storage/usersPhoto/*
+/.vscode
+phinx.php
