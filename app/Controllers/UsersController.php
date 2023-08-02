@@ -64,7 +64,7 @@ class UsersController extends Action
                 "messagem" => "Ocorreu o seguinte erro: " . $e
             ];
             http_response_code(500);
-            echo json_encode($response);    
+            echo json_encode($response);
         }
     }
 

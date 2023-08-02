@@ -2,19 +2,21 @@
 
 namespace App;
 
-class Connection {
+class Connection
+{
 
-    public static function getDb() {
+    public static function getDb()
+    {
         try {
             $conn = new \PDO(
                 "mysql:host=localhost;dbname=agenda;charset=utf8",
                 "root",
-                "password"
+                "P@ssw0rd"
             );
 
             return $conn;
         } catch (\PDOException $e) {
-            echo 'Erro'.$e;
+            echo 'Erro' . $e;
         }
     }
 }
