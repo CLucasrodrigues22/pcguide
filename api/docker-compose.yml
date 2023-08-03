@@ -1,0 +1,24 @@
+version: '3.3'
+
+php:
+  image: php:8.2-apache
+  container_name: api-pcguide
+  ports: 
+    - "8080:80"
+    - "443:443"
+  volumes:
+    - ./pcguide/api:/var/www/html
+  links:
+    - db
+
+db:
+  image: mysql-latest
+  container_name: pcguide
+  ports:
+    - "3306:3306"
+  volumes:
+    - /var/lib/mysql
+  environment:
+    - MYSQL_DB=pcguidedev
+    - MYSQL_ROOT_USER=root
+    - MYSQL_ROOT_PASSWORD=password
