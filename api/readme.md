@@ -9,3 +9,9 @@
 
 - Rodar migrations
 ## vendor/bin/phinx migrate
+
+
+----------------------------------------------
+
+- iniciar imagens docker
+## docker compose up -d
