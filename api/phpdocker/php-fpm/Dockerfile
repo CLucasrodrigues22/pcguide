@@ -15,4 +15,4 @@ RUN apt-get update \
         php8.2-ssh2 \
         php8.2-raphf \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* 
+    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*

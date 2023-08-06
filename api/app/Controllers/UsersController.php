@@ -14,8 +14,17 @@ class UsersController extends Action
         try {
             $users = Container::getModel('Users');
             $getListUsers = $users->getAllUsers();
-            http_response_code(200);
-            echo json_encode($getListUsers);
+            if ($getListUsers === false) {
+                $response = [
+                    "erro" => true,
+                    "messagem" => "No user found!"
+                ];
+                http_response_code(404);
+                echo json_encode($response);
+            } else {
+                http_response_code(200);
+                echo json_encode($getListUsers);
+            }
         } catch (\PDOException $e) {
             $response = [
                 "erro" => true,
@@ -75,13 +84,17 @@ class UsersController extends Action
             $user = Container::getModel('Users');
 
             if ($_FILES['photo']['name'] != '') {
+                // remove old photo
+                $photoOld = $user->showOnlyUser($id);
+                unlink($photoOld->photo);
                 // setting attribut photo with new file name
                 $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/', ['png', 'jpg', 'jpeg']);
                 $user->__set('photo', $storagePhoto);
             } else {
-                //recovery current photo's name if $_FILES if empty
-                $photoOld = $user->showOnlyUser($id);
-                $user->__set('photo', $photoOld->photo);
+                echo 'sem foto';
+                // //recovery current photo's name if $_FILES if empty
+                // $photoOld = $user->showOnlyUser($id);
+                // $user->__set('photo', $photoOld->photo);
             }
 
             $user->__set('name', $_POST['name']);
@@ -106,12 +119,9 @@ class UsersController extends Action
             $id = $_GET['id'];
             $user = Container::getModel('Users');
 
-            $dir = 'storage/usersPhoto/';
-
             // Remove current photo
             $photoOld = $user->showOnlyUser($id);
-            $path = $dir . $photoOld->photo;
-            unlink($path);
+            unlink($photoOld->photo);
 
             $response = $user->delete($id);
             http_response_code(200);

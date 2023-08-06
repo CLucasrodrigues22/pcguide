@@ -6,10 +6,15 @@ use PCGUIDE\Init\Bootstrap;
 
 class Route extends Bootstrap
 {
-
-    // função para iniciar rotas
+    // function to init routs
     protected function initRoutes()
     {
+        // Route form home app
+        $routes['/home'] = array(
+            'route' => '/home',
+            'controller' => 'HomeController',
+            'action' => 'index'
+        );
 
         // Route to show all users
         $routes['/users'] = array(

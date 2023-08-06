@@ -26,7 +26,8 @@ class Users extends Model
     public function getAllUsers()
     {
         $q = "select user_id, name, email, phone, photo from users";
-        return $this->db->query($q)->fetchAll();
+        $stmt = $this->db->query($q)->fetch(\PDO::FETCH_ASSOC);
+        return $stmt;
     }
 
     public function create()
