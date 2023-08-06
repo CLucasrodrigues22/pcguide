@@ -65,8 +65,17 @@ class UsersController extends Action
             $id = $_GET['id'];
             $user = Container::getModel('Users');
             $response = $user->showOnlyUser($id);
-            http_response_code(200);
-            echo json_encode($response);
+            if ($response === false) {
+                $response = [
+                    "erro" => true,
+                    "messagem" => "No user found!"
+                ];
+                http_response_code(404);
+                echo json_encode($response);
+            } else {
+                http_response_code(200);
+                echo json_encode($response);
+            }
         } catch (\PDOException $e) {
             $response = [
                 "erro" => true,
@@ -82,26 +91,34 @@ class UsersController extends Action
         try {
             $id = $_GET['id'];
             $user = Container::getModel('Users');
-
-            if ($_FILES['photo']['name'] != '') {
-                // remove old photo
-                $photoOld = $user->showOnlyUser($id);
-                unlink($photoOld->photo);
-                // setting attribut photo with new file name
-                $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/', ['png', 'jpg', 'jpeg']);
-                $user->__set('photo', $storagePhoto);
+            if ($user->showOnlyUser($id) === false) {
+                $response = [
+                    "erro" => true,
+                    "messagem" => "No user found!"
+                ];
+                http_response_code(404);
+                echo json_encode($response);
             } else {
-                // recovery current photo's name if $_FILES if empty
-                $photoOld = $user->showOnlyUser($id);
-                $user->__set('photo', $photoOld->photo);
-            }
+                if ($_FILES['photo']['name'] != '') {
+                    // remove old photo
+                    $photoOld = $user->showOnlyUser($id);
+                    unlink($photoOld->photo);
+                    // setting attribut photo with new file name
+                    $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/', ['png', 'jpg', 'jpeg']);
+                    $user->__set('photo', $storagePhoto);
+                } else {
+                    // recovery current photo's name if $_FILES if empty
+                    $photoOld = $user->showOnlyUser($id);
+                    $user->__set('photo', $photoOld->photo);
+                }
 
-            $user->__set('name', $_POST['name']);
-            $user->__set('email', $_POST['email']);
-            $user->__set('phone', $_POST['phone']);
-            $response = $user->update($id);
-            http_response_code(200);
-            echo json_encode($response);
+                $user->__set('name', $_POST['name']);
+                $user->__set('email', $_POST['email']);
+                $user->__set('phone', $_POST['phone']);
+                $response = $user->update($id);
+                http_response_code(200);
+                echo json_encode($response);
+            }
         } catch (\PDOException $e) {
             $response = [
                 "erro" => true,
