@@ -91,10 +91,9 @@ class UsersController extends Action
                 $storagePhoto = $this->storage($_FILES['photo'], 'storage/usersPhoto/', ['png', 'jpg', 'jpeg']);
                 $user->__set('photo', $storagePhoto);
             } else {
-                echo 'sem foto';
-                // //recovery current photo's name if $_FILES if empty
-                // $photoOld = $user->showOnlyUser($id);
-                // $user->__set('photo', $photoOld->photo);
+                // recovery current photo's name if $_FILES if empty
+                $photoOld = $user->showOnlyUser($id);
+                $user->__set('photo', $photoOld->photo);
             }
 
             $user->__set('name', $_POST['name']);

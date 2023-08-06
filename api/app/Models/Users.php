@@ -73,7 +73,7 @@ class Users extends Model
         $stmt->execute();
 
         // Fetch the updated data
-        $q = "SELECT * FROM users WHERE user_id = :user_id";
+        $q = "select user_id, name, email, phone, photo from users where user_id = :user_id";
         $stmt = $this->db->prepare($q);
         $stmt->bindValue(':user_id', $id);
         $stmt->execute();
