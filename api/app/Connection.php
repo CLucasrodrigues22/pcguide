@@ -9,11 +9,10 @@ class Connection
     {
         try {
             $conn = new \PDO(
-                "mysql:host=localhost;dbname=pcguidedev;charset=utf8",
+                "mysql:host=mysql;dbname=pcguidedev;charset=utf8",
                 "root",
-                "password"
+                "root"
             );
-
             return $conn;
         } catch (\PDOException $e) {
             echo 'Erro' . $e;
