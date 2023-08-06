@@ -13,6 +13,7 @@ class Connection
                 "root",
                 "root"
             );
+
             return $conn;
         } catch (\PDOException $e) {
             echo 'Erro' . $e;

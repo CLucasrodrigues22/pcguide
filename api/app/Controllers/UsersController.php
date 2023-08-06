@@ -17,13 +17,12 @@ class UsersController extends Action
             http_response_code(200);
             echo json_encode($getListUsers);
         } catch (\PDOException $e) {
-            echo $e;
-            // $response = [
-            //     "erro" => true,
-            //     "messagem" => "Ocorreu o seguinte erro: " . $e
-            // ];
-            // http_response_code(500);
-            // echo json_encode($response);
+            $response = [
+                "erro" => true,
+                "messagem" => "Ocorreu o seguinte erro: " . $e
+            ];
+            http_response_code(500);
+            echo json_encode($response);
         }
     }
 

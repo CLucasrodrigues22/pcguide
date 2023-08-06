@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use MVC\Model\Model;
+use PCGUIDE\Model\Model;
 
 class Users extends Model
 {

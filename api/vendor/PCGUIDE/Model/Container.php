@@ -10,11 +10,14 @@ class Container
     public static function getModel($model)
     {
 
-        // Retornar o modelo instanciado, já com a conexão estabelecida
-        $class = "\\App\\Models\\" . ucfirst($model);
+        try {
+            // Retornar o modelo instanciado, já com a conexão estabelecida
+            $class = "\\App\\Models\\" . ucfirst($model);
 
-        $conn = Connection::getDb();
-
-        return new $class($conn);
+            $conn = Connection::getDb();
+            return new $class($conn);
+        } catch (\Throwable $th) {
+            echo $th;
+        }
     }
 }
