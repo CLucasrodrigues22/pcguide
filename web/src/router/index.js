@@ -9,12 +9,7 @@ const router = createRouter({
       component: () => import('../views/Index.vue')
     },
     {
-      path: '/sobre',
-      name: 'SobreView',
-      component: () => import('../views/SobreNos.vue')
-    },
-    {
-      path: '/loja',
+      path: '/store',
       name: 'LojaView',
       component: () => import('../views/Loja.vue')
     },
@@ -24,9 +19,14 @@ const router = createRouter({
       component: () => import('../views/Blog.vue')
     },
     {
-      path: '/contato',
+      path: '/contact',
       name: 'ContatoView',
       component: () => import('../views/Contato.vue')
+    },
+    {
+      path: '/about',
+      name: 'SobreView',
+      component: () => import('../views/SobreNos.vue')
     }
   ]
 })

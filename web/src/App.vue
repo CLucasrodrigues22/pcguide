@@ -1,20 +1,20 @@
 <template>
   <div>
     <HeaderComponent />
-    <NavBarComponent />
     <router-view />
+    <SearchComponent />
     <FooterComponent />
   </div>
 </template>
 <script>
 import HeaderComponent from './components/HeaderComponent.vue'
-import NavBarComponent from './components/NavBarComponent.vue'
-import FooterComponent from './components/Footer.vue'
+import SearchComponent from './components/SearchComponent.vue'
+import FooterComponent from './components/FooterComponent.vue'
 export default {
   components: {
     HeaderComponent,
-    NavBarComponent,
-    FooterComponent
+    FooterComponent,
+    SearchComponent
   }
 }
 </script>

@@ -1,0 +1,10 @@
+#paragrafoAvaliacao {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    /* Cor de fundo, ajuste conforme necessário */
+    padding: 10px;
+    /* Espaçamento interno, ajuste conforme necessário */
+}
