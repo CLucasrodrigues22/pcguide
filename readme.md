@@ -24,16 +24,21 @@ Próximas atualizações serão voltadas nas seguintes tarefas:
 Para instalar o projeto PC Guide, siga estas etapas:
 
 Linux:
+
+- Clone o repositório:
 ```
-- Clone o repositório: <git clone https://github.com/CLucasrodrigues22/pcguide>
+git clone https://github.com/CLucasrodrigues22/pcguide
+```
 - Instale as dependências do Vue JS:
     - Na raiz do projeto: 
-        < cd web/ >
-        < npm i>
-    - Para instalar imagens no Docker
-        < docker composer up -d>
-    - Ou se prefirir, dentro do diretório web, digite:
-        <npm run dev>
-```
-
+        ```
+        cd web/
+        ```
+        ```
+        npm install && npm run dev
+        ```
+    - Caso queria subir um container no Docker, execute para instalar a imagem da aplicação, com o terminal no diretório web/, digite:
+        ```
+        docker composer up -d
+        ```
 Em breve mais descrições;
