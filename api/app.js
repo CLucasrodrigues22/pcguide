@@ -10,6 +10,10 @@ const conn = require("./db/Conn");
 
 conn();
 
-app.listen(3000, function () {
+//Router
+const routes = require("./routes/router");
+app.use("/api", routes);
+
+app.listen(80, function () {
     console.log('API ok!');
 });

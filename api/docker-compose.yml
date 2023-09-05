@@ -1,0 +1,11 @@
+version: '3.7'
+services:
+  vue-app:
+    image: node:18-alpine # Use a imagem base do Node.js
+    container_name: api-container
+    working_dir: /app
+    volumes:
+      - .:/app # Mapear o diretório local para o diretório de trabalho do contêiner
+    ports:
+      - "80:80" # Mapear a porta do host para a porta do contêiner
+    command: [ "npm", "start" ] # Comando para iniciar o servidor
