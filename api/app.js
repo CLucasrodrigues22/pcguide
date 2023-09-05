@@ -1,5 +1,9 @@
+/* imports */
+const jwt = require("jsonwebtoken");
 const express = require("express");
 const cors = require("cors");
+require("dotenv").config();
+
 const app = express();
 
 app.use(cors());
@@ -14,6 +18,4 @@ conn();
 const routes = require("./routes/router");
 app.use("/api", routes);
 
-app.listen(80, function () {
-    console.log('API ok!');
-});
+app.listen(80);
