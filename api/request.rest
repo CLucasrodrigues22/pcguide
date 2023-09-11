@@ -1,0 +1,12 @@
+### // ------------ Parties requests ------------
+
+// POST method 
+POST http://localhost/api/auth/signup
+
+Content-Type: application/json
+
+{
+    "username": "Lucas", 
+    "email": "lucas@email.com", 
+    "password": "12345678",
+}
