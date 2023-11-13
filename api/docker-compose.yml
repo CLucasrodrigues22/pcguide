@@ -1,11 +1,44 @@
 version: '3.7'
+
 services:
-  vue-app:
-    image: node:18-alpine # Use a imagem base do Node.js
-    container_name: api-container
-    working_dir: /app
-    volumes:
-      - .:/app # Mapear o diretório local para o diretório de trabalho do contêiner
+  #MySql Service
+  mysql:
+    image: mysql:latest
+    container_name: dbserver
+    restart: always
+
     ports:
-      - "80:80" # Mapear a porta do host para a porta do contêiner
-    command: [ "npm", "start" ] # Comando para iniciar o servidor
+      - "3306:3306"
+
+    environment:
+      MYSQL_DATABASE: locadora
+      MYSQL_ROOT_PASSWORD: password
+
+    volumes:
+      - /var/lib/mysql
+      - ./Docker/mysql/my.cnf:/etc/mysql/my.cnf
+
+  # PHP-FPM Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    container_name: app
+    restart: always
+    working_dir: /var/www
+
+    volumes:
+      - ./:/var/www
+      - ./Docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    # NGINX Service
+  webserver:
+    image: nginx:alpine
+    container_name: webserver
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./:/var/www
+      - ./Docker/nginx/conf.d/:/etc/nginx/conf.d/
